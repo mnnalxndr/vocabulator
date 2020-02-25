@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 
 const WordSearch = () => {
-    const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+  const [searchTerm, setSearchTerm] = useState(searchInput);
 
-    return (
-        <React.Fragment>
-            <input
-                type="text"
-                placeholder="Search for a word"
-                onChange={(e) => setSearchInput(e.target.value)}
-            />
-            <br/>
-            <button type="button">Define</button>
-        </React.Fragment>
-    );
+  return (
+    <div>
+      <input
+        type="text"
+        placeholder="Search for a word"
+        onChange={(e) => setSearchInput(e.target.value)}
+      />
+      <br />
+      <button type="button" onClick={() => setSearchTerm(searchInput)}>Define</button>
+      <br/>
+      {searchTerm}
+    </div>
+  );
 };
 
 export default WordSearch;
