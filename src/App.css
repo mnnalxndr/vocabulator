@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+/*
+ *
+ */
+.flashcard-wrapper {
+  margin: 0 auto;
+}
+
+.flashcard {
+  width: 100px;
+  height: 100pxx;
+  margin: 5px;
+  display: flex;
+  cursor: pointer;
+  border: 1px black solid;
+}
+
+.flashcard-content {
+  margin: 0 auto;
+}

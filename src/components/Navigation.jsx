@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import WordSearch from './WordSearch';
-import Test from './Test';
+import Test from './test/Test';
 
 const SEARCH = 'search';
 const TEST = 'test';
