@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Definitions from './Definitions';
 
 const WordSearch = () => {
   const [searchInput, setSearchInput] = useState('');
@@ -14,7 +15,7 @@ const WordSearch = () => {
       <br />
       <button type="button" onClick={() => setSearchTerm(searchInput)}>Define</button>
       <br/>
-      {searchTerm}
+      <Definitions searchTerm={searchTerm} />
     </div>
   );
 };
