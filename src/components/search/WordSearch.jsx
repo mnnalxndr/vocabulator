@@ -4,42 +4,85 @@ import Definitions from './Definitions';
 const WordSearch = () => {
   const [searchInput, setSearchInput] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const [definitions, setDefinitions] = useState();
+  const [definitions, setDefinitions] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   
   useEffect(() => {
     if (searchTerm.length > 0) {
-      fetch(`https://cors-anywhere.herokuapp.com/https://od-api.oxforddictionaries.com/api/v2/entries/en-gb/${searchTerm}?fields=definitions,examples&strictMatch=true`, {
-        headers: {
-          "Accept": "application/json",
-          "app_id": "95321022",
-          "app_key": "67f37c1d36e23e98452025364b6e0af9"
-        }
-      })
-      .then(response => response.json())
-      .then(results => {
-        setDefinitions(results.results[0].lexicalEntries.map(entry => {
-          const def = entry.entries[0].senses[0]; 
-          return {
-            id: def.id,
-            definition: def.definitions[0],
-            example: def.examples[0].text
+      setIsLoading(true);
+      setError(null);
+      setDefinitions(null);
+
+      fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchTerm}`)
+        .then(response => {
+          if (!response.ok) {
+            if (response.status === 404) {
+              throw new Error(`Word "${searchTerm}" not found in dictionary.`);
+            }
+            throw new Error(`Failed to fetch definition: ${response.statusText}`);
           }
-        }))
-      })
+          return response.json();
+        })
+        .then(results => {
+          // Free Dictionary API returns an array of entries
+          // Each entry has meanings array, each meaning has definitions array
+          const allDefinitions = [];
+          
+          results.forEach((entry, entryIndex) => {
+            entry.meanings.forEach((meaning, meaningIndex) => {
+              meaning.definitions.forEach((def, defIndex) => {
+                allDefinitions.push({
+                  id: `${entryIndex}-${meaningIndex}-${defIndex}`,
+                  partOfSpeech: meaning.partOfSpeech,
+                  definition: def.definition,
+                  example: def.example || null
+                });
+              });
+            });
+          });
+
+          setDefinitions(allDefinitions);
+          setIsLoading(false);
+        })
+        .catch(err => {
+          setError(err.message);
+          setIsLoading(false);
+          setDefinitions(null);
+        });
     }
   }, [searchTerm]);
+
+  const handleSearch = () => {
+    const trimmedInput = searchInput.trim();
+    if (trimmedInput.length > 0) {
+      setSearchTerm(trimmedInput);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   return (
     <div>
       <input
         type="text"
         placeholder="Search for a word"
+        value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
+        onKeyPress={handleKeyPress}
       />
       <br />
-      <button type="button" onClick={() => setSearchTerm(searchInput)}>Define</button>
+      <button type="button" onClick={handleSearch} disabled={isLoading}>
+        {isLoading ? 'Searching...' : 'Define'}
+      </button>
       <br/>
+      {isLoading && <div>Loading definition...</div>}
+      {error && <div style={{ color: 'red', marginTop: '10px' }}>Error: {error}</div>}
       <Definitions searchTerm={searchTerm} definitionList={definitions} />
     </div>
   );
