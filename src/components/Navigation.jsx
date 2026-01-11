@@ -27,12 +27,15 @@ export default function Navigation() {
     case TEST:
       content = <Test />
       break;
-    
+    default:
+      content = <WordSearch />;
+      break;
   }
   return (
     <React.Fragment>
       {menuOptions.map(option => (
         <button
+          key={option.value}
           type="button"
           selected={selectedMenu === option.value}
           onClick={() => setSelectedMenu(option.value)}

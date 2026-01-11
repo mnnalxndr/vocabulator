@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 
 
@@ -10,7 +10,7 @@ const Definitions = (props) => {
       {searchTerm}
       {definitionList ?
       definitionList.map(entry => (
-        <div className="definition">
+        <div key={entry.id} className="definition">
           <div>{entry.definition}</div>
           <div>{entry.example}</div>
         </div>

@@ -47,6 +47,7 @@ export default function Test() {
       {'Test Type:'}
       {TEST_TYPES.map(type => (
         <button
+          key={type.value}
           onClick={() => setTestType(type.value)}
         >
           {type.label}
@@ -56,8 +57,9 @@ export default function Test() {
         {
           testType === INDIVIDUAL
           ? <Flashcard word={wordList[0].word} definition={wordList[0].definition} />
-          : wordList.map(word => (
+          : wordList.map((word, index) => (
             <Flashcard 
+              key={index}
               word={word.word}
               definition={word.definition}
             />

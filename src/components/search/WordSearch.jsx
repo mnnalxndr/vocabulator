@@ -18,7 +18,6 @@ const WordSearch = () => {
       })
       .then(response => response.json())
       .then(results => {
-        debugger;
         setDefinitions(results.results[0].lexicalEntries.map(entry => {
           const def = entry.entries[0].senses[0]; 
           return {
