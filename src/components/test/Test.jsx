@@ -56,7 +56,7 @@ export default function Test() {
           </button>
         ))}
       </div>
-      <div className="flashcard-wrapper">
+      <div className={`flashcard-wrapper ${testType === INDIVIDUAL ? 'individual-mode' : 'set-mode'}`}>
         {
           testType === INDIVIDUAL
           ? <Flashcard word={wordList[0].word} definition={wordList[0].definition} />

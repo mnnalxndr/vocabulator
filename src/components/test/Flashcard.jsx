@@ -7,10 +7,12 @@ export default function Flashcard(props) {
 
   return (
     <div
-      className="flashcard"
+      className={`flashcard ${flipped ? 'flipped' : ''}`}
       onClick={() => setFlipped(!flipped)}
     >
-      <span className="flashcard-content">{ flipped ? definition : word }</span>
+      <div className="flashcard-content">
+        { flipped ? definition : word }
+      </div>
     </div>
   )
 }

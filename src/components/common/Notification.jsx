@@ -19,13 +19,13 @@ const Notification = ({ message, type = 'success', onClose, duration = 3000 }) =
   const getBackgroundColor = () => {
     switch (type) {
       case 'success':
-        return '#4caf50';
+        return 'var(--success)';
       case 'error':
-        return '#f44336';
+        return 'var(--error)';
       case 'info':
-        return '#2196f3';
+        return 'var(--info)';
       default:
-        return '#2196f3';
+        return 'var(--info)';
     }
   };
 

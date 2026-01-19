@@ -1,8 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import './theme.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+// apply persisted theme (avoids flash-of-unstyled-theme where possible)
+const storedTheme = window.localStorage && window.localStorage.getItem && window.localStorage.getItem('theme');
+if (storedTheme) {
+  document.documentElement.setAttribute('data-theme', storedTheme);
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
