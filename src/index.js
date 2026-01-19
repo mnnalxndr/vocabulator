@@ -7,9 +7,8 @@ import * as serviceWorker from './serviceWorker';
 
 // apply persisted theme (avoids flash-of-unstyled-theme where possible)
 const storedTheme = window.localStorage && window.localStorage.getItem && window.localStorage.getItem('theme');
-if (storedTheme) {
-  document.documentElement.setAttribute('data-theme', storedTheme);
-}
+const initialTheme = storedTheme || 'dark';
+document.documentElement.setAttribute('data-theme', initialTheme);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

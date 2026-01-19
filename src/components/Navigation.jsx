@@ -33,15 +33,6 @@ export default function Navigation({ theme, setTheme }) {
   }
   return (
     <React.Fragment>
-      <div style={{ float: 'right' }}>
-        <button
-          type="button"
-          onClick={() => setTheme && setTheme(theme === 'dark' ? 'light' : 'dark')}
-          aria-label="Toggle theme"
-        >
-          {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
-        </button>
-      </div>
       {menuOptions.map(option => (
         <button
           key={option.value}

@@ -64,19 +64,19 @@ const Definitions = (props) => {
         type={notification?.type} 
         onClose={handleCloseNotification}
       />
-      <h3>Definitions for "{searchTerm}"</h3>
+      <h3 style={{ color: 'var(--text)' }}>Definitions for "{searchTerm}"</h3>
       {definitionList.map(entry => {
         const isSaved = savedFlashcards.has(entry.id);
         return (
           <div key={entry.id} className="definition">
             {entry.partOfSpeech && (
-              <div style={{ fontWeight: 'bold', fontStyle: 'italic', marginBottom: '5px' }}>
+              <div style={{ fontWeight: 'bold', fontStyle: 'italic', marginBottom: '5px', color: 'var(--text)' }}>
                 {entry.partOfSpeech}
               </div>
             )}
-            <div style={{ marginBottom: '5px' }}>{entry.definition}</div>
+            <div style={{ marginBottom: '5px', color: 'var(--text)' }}>{entry.definition}</div>
             {entry.example && (
-              <div style={{ fontStyle: 'italic', color: '#666', marginTop: '5px' }}>
+              <div style={{ fontStyle: 'italic', color: 'var(--muted)', marginTop: '5px' }}>
                 Example: "{entry.example}"
               </div>
             )}
@@ -87,7 +87,7 @@ const Definitions = (props) => {
               style={{
                 marginTop: '10px',
                 padding: '8px 16px',
-                backgroundColor: isSaved ? '#4caf50' : '#2196f3',
+                backgroundColor: isSaved ? 'var(--success)' : 'var(--info)',
                 color: 'white',
                 border: 'none',
                 borderRadius: '4px',
