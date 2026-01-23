@@ -126,6 +126,41 @@ vocabulator/
 - **Free Dictionary API** - Word definitions
 - **localStorage** - Client-side data persistence
 
+## Deployment
+
+The app is configured for deployment to Netlify. The `netlify.toml` file contains the deployment configuration.
+
+### Deploy to Netlify
+
+**Option 1: GitHub Integration (Recommended)**
+1. Go to [Netlify](https://www.netlify.com/) and sign up/login
+2. Click "Add new site" → "Import an existing project"
+3. Connect your GitHub account and select the `vocabulator` repository
+4. Netlify will automatically detect the build settings from `netlify.toml`
+5. Click "Deploy site"
+6. Your app will be live at `https://your-site-name.netlify.app`
+7. Future pushes to the `master` branch will automatically deploy
+
+**Option 2: Netlify CLI**
+```bash
+# Install Netlify CLI globally
+npm install -g netlify-cli
+
+# Login to Netlify
+netlify login
+
+# Deploy (first time will ask for configuration)
+netlify deploy --prod
+```
+
+**Option 3: Manual Deployment**
+1. Build the app: `npm run build`
+2. Go to [Netlify Dashboard](https://app.netlify.com/)
+3. Drag and drop the `build/` folder to deploy
+4. Note: This requires manual redeployment for updates
+
+The app will be automatically served with HTTPS and a free Netlify subdomain.
+
 ## Development
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
