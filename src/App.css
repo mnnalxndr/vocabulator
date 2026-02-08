@@ -121,16 +121,32 @@
   gap: 10px;
 }
 
+.Test-toolbar-row__options {
+  display: flex;
+  gap: 10px;
+}
+
 .Test-toolbar-label {
   color: var(--text);
 }
 
 .Test-type-button,
+.Test-sort-button,
 .Test-edit-mode-button {
   padding: 8px 16px;
   border: 1px solid var(--card-border);
   border-radius: 4px;
   cursor: pointer;
+}
+
+.Test-sort-select {
+  padding: 8px 12px;
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  cursor: pointer;
+  font-size: inherit;
 }
 
 .Test-actions {
@@ -139,6 +155,13 @@
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  width: 100%;
+}
+
+.Test-remove-words-wrap {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
   width: 100%;
 }
 
@@ -152,6 +175,10 @@
   .Test-toolbar-row {
     width: 100%;
     justify-content: center;
+  }
+
+  .Test-toolbar-row--test-type {
+    flex-direction: column;
   }
 
   .flashcard-wrapper {

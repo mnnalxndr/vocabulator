@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Flashcard from './Flashcard';
 import { getFlashcards, deleteFlashcard } from '../../utils/flashcardStorage';
 
@@ -14,7 +14,17 @@ const TEST_TYPES = [
     value: SET,
     label: 'Set'
   },
-]
+];
+
+const ORDER_ADDED = 'orderAdded';
+const ALPHABETICAL = 'alphabetical';
+const RANDOMISED = 'randomised';
+
+const SET_VIEW_SORT_OPTIONS = [
+  { value: ORDER_ADDED, label: 'Order added' },
+  { value: ALPHABETICAL, label: 'Alphabetical' },
+  { value: RANDOMISED, label: 'Randomised' },
+];
 
 // Fisher-Yates shuffle algorithm
 const shuffleArray = (array) => {
@@ -33,6 +43,19 @@ export default function Test() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [setViewSortOrder, setSetViewSortOrder] = useState(ORDER_ADDED);
+
+  // Derived list for Set view (order added / alphabetical / randomised)
+  const setViewDisplayList = useMemo(() => {
+    if (wordList.length === 0) return [];
+    if (setViewSortOrder === ORDER_ADDED) return wordList;
+    if (setViewSortOrder === ALPHABETICAL) {
+      return [...wordList].sort((a, b) =>
+        a.word.localeCompare(b.word, undefined, { sensitivity: 'base' })
+      );
+    }
+    return shuffleArray(wordList);
+  }, [wordList, setViewSortOrder]);
 
   // Load flashcards on mount
   useEffect(() => {
@@ -96,34 +119,40 @@ export default function Test() {
   return(
     <div>
       <div className="Test-toolbar">
-        <div className="Test-toolbar-row">
+        <div className="Test-toolbar-row Test-toolbar-row--test-type">
           <span className="Test-toolbar-label">Test Type:</span>
-          {TEST_TYPES.map(type => (
-            <button
-              key={type.value}
-              onClick={() => handleTestTypeChange(type.value)}
-              className="Test-type-button"
-              style={{
-                backgroundColor: testType === type.value ? 'var(--info)' : 'var(--button-bg)',
-                color: testType === type.value ? 'white' : 'var(--button-text)',
-              }}
-            >
-              {type.label}
-            </button>
-          ))}
+          <div className="Test-toolbar-row__options">
+            {TEST_TYPES.map(type => (
+              <button
+                key={type.value}
+                onClick={() => handleTestTypeChange(type.value)}
+                className="Test-type-button"
+                style={{
+                  backgroundColor: testType === type.value ? 'var(--info)' : 'var(--button-bg)',
+                  color: testType === type.value ? 'white' : 'var(--button-text)',
+                }}
+              >
+                {type.label}
+              </button>
+            ))}
+          </div>
         </div>
         {testType === SET && (
-          <button
-            className="Test-edit-mode-button"
-            onClick={handleToggleEditMode}
-            style={{
-              backgroundColor: isEditMode ? 'var(--error)' : 'var(--button-bg)',
-              color: isEditMode ? 'white' : 'var(--button-text)',
-            }}
-          >
-            {isEditMode ? 'Done' : 'Remove Words'}
-          </button>
-        )}
+            <div className="Test-toolbar-row">
+              <span className="Test-toolbar-label">Order:</span>
+              <select
+                value={setViewSortOrder}
+                onChange={(e) => setSetViewSortOrder(e.target.value)}
+                className="Test-sort-select"
+              >
+                {SET_VIEW_SORT_OPTIONS.map(option => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
       </div>
       <div className={`flashcard-wrapper ${testType === INDIVIDUAL ? 'individual-mode' : 'set-mode'}`}>
         {
@@ -187,7 +216,7 @@ export default function Test() {
                 )}
               </>
             )
-          : wordList.map((flashcard, index) => (
+          : setViewDisplayList.map((flashcard, index) => (
             <Flashcard 
               key={`${flashcard.word}-${index}`}
               word={flashcard.word}
@@ -198,6 +227,20 @@ export default function Test() {
           ))
         }
       </div>
+      {testType === SET && (
+        <div className="Test-remove-words-wrap">
+          <button
+            className="Test-edit-mode-button"
+            onClick={handleToggleEditMode}
+            style={{
+              backgroundColor: isEditMode ? 'var(--error)' : 'var(--button-bg)',
+              color: isEditMode ? 'white' : 'var(--button-text)',
+            }}
+          >
+            {isEditMode ? 'Done' : 'Remove Words'}
+          </button>
+        </div>
+      )}
     </div>
   )
 };
