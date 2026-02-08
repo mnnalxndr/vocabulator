@@ -138,13 +138,7 @@ export default function Test() {
                   />
                 )}
                 {shuffledList.length > 0 && (
-                  <div style={{ 
-                    marginTop: '20px', 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    alignItems: 'center',
-                    gap: '10px'
-                  }}>
+                  <div className="Test-actions">
                     <div style={{ color: 'var(--text)', fontSize: '14px' }}>
                       Card {currentIndex + 1} of {shuffledList.length}
                     </div>

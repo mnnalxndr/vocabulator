@@ -89,16 +89,17 @@
 @media (max-width: 600px) {
   .WordSearch-form {
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     padding: 0 16px;
   }
 
   .WordSearch-input {
     max-width: none;
+    width: 100%;
   }
 
   .WordSearch-submit {
-    width: 100%;
+    align-self: center;
   }
 }
 
@@ -132,15 +133,39 @@
   cursor: pointer;
 }
 
+.Test-actions {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
 @media (max-width: 600px) {
   .Test-toolbar {
     flex-direction: column;
+    align-items: center;
     padding: 0 16px;
   }
 
   .Test-toolbar-row {
     width: 100%;
     justify-content: center;
+  }
+
+  .flashcard-wrapper {
+    padding: 20px 16px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flashcard-wrapper.individual-mode {
+    align-items: center;
+  }
+
+  .Test-actions {
+    align-items: center;
   }
 }
 
@@ -234,8 +259,8 @@
     width: 100%;
     max-width: 350px;
     height: 260px;
-    margin-left: 16px;
-    margin-right: 16px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
