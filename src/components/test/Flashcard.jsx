@@ -31,10 +31,12 @@ export default function Flashcard(props) {
           onClick={handleDelete}
           style={{
             position: 'absolute',
-            top: '5px',
-            right: '5px',
-            width: '28px',
-            height: '28px',
+            top: '8px',
+            right: '8px',
+            width: '44px',
+            height: '44px',
+            minWidth: '44px',
+            minHeight: '44px',
             borderRadius: '50%',
             backgroundColor: 'var(--error)',
             color: 'white',

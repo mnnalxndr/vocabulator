@@ -2,6 +2,168 @@
   text-align: center;
 }
 
+/* Header: flex row on desktop, stack on mobile */
+.App-header-inner {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px;
+}
+
+.App-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.App-theme-toggle {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .App-header-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .App-header-text {
+    width: 100%;
+  }
+}
+
+/* Search form: inline on desktop, stacked full-width on mobile */
+.WordSearch-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.WordSearch-input {
+  padding: 12px 16px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 6px;
+  border: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+  color: var(--text);
+  box-sizing: border-box;
+}
+
+.WordSearch-submit {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: var(--info);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.WordSearch-submit:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+  .WordSearch-form {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 16px;
+  }
+
+  .WordSearch-input {
+    max-width: none;
+  }
+
+  .WordSearch-submit {
+    width: 100%;
+  }
+}
+
+/* Test toolbar: row on desktop, stack on mobile */
+.Test-toolbar {
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.Test-toolbar-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.Test-toolbar-label {
+  color: var(--text);
+}
+
+.Test-type-button,
+.Test-edit-mode-button {
+  padding: 8px 16px;
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .Test-toolbar {
+    flex-direction: column;
+    padding: 0 16px;
+  }
+
+  .Test-toolbar-row {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Navigation tabs: flex wrap, equal width on mobile */
+.Navigation-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.Navigation-tab {
+  min-width: 120px;
+}
+
+@media (max-width: 600px) {
+  .Navigation-tabs {
+    padding: 0 16px;
+  }
+
+  .Navigation-tab {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -61,6 +223,16 @@
   perspective: 1000px;
   cursor: pointer;
   margin: 10px;
+}
+
+@media (max-width: 600px) {
+  .flashcard-inner {
+    width: 100%;
+    max-width: 350px;
+    height: 260px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
 }
 
 .flashcard-inner:hover .flashcard {

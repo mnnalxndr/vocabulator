@@ -95,20 +95,17 @@ export default function Test() {
 
   return(
     <div>
-      <div style={{ marginBottom: '20px', position: 'relative', width: '100%' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}>
-          <span>{'Test Type:'}</span>
+      <div className="Test-toolbar">
+        <div className="Test-toolbar-row">
+          <span className="Test-toolbar-label">Test Type:</span>
           {TEST_TYPES.map(type => (
             <button
               key={type.value}
               onClick={() => handleTestTypeChange(type.value)}
+              className="Test-type-button"
               style={{
-                padding: '8px 16px',
                 backgroundColor: testType === type.value ? 'var(--info)' : 'var(--button-bg)',
                 color: testType === type.value ? 'white' : 'var(--button-text)',
-                border: '1px solid var(--card-border)',
-                borderRadius: '4px',
-                cursor: 'pointer'
               }}
             >
               {type.label}
@@ -117,18 +114,11 @@ export default function Test() {
         </div>
         {testType === SET && (
           <button
+            className="Test-edit-mode-button"
             onClick={handleToggleEditMode}
             style={{
-              position: 'absolute',
-              right: '0',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              padding: '8px 16px',
               backgroundColor: isEditMode ? 'var(--error)' : 'var(--button-bg)',
               color: isEditMode ? 'white' : 'var(--button-text)',
-              border: '1px solid var(--card-border)',
-              borderRadius: '4px',
-              cursor: 'pointer'
             }}
           >
             {isEditMode ? 'Done' : 'Remove Words'}

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import './Notification.css';
 
 const Notification = ({ message, type = 'success', onClose, duration = 3000 }) => {
   useEffect(() => {
@@ -29,22 +30,11 @@ const Notification = ({ message, type = 'success', onClose, duration = 3000 }) =
     }
   };
 
-  const styles = {
-    position: 'fixed',
-    top: '20px',
-    right: '20px',
-    padding: '12px 20px',
-    borderRadius: '4px',
-    backgroundColor: getBackgroundColor(),
-    color: 'white',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-    zIndex: 1000,
-    maxWidth: '300px',
-    wordWrap: 'break-word'
-  };
-
   return (
-    <div style={styles}>
+    <div
+      className="Notification-toast"
+      style={{ backgroundColor: getBackgroundColor() }}
+    >
       {message}
     </div>
   );

@@ -33,16 +33,19 @@ export default function Navigation({ theme, setTheme }) {
   }
   return (
     <React.Fragment>
-      {menuOptions.map(option => (
-        <button
-          key={option.value}
-          type="button"
-          selected={selectedMenu === option.value}
-          onClick={() => setSelectedMenu(option.value)}
-        >
-          {option.label}
-        </button>
-      ))}
+      <nav className="Navigation-tabs" aria-label="Main navigation">
+        {menuOptions.map(option => (
+          <button
+            key={option.value}
+            type="button"
+            className="Navigation-tab"
+            aria-pressed={selectedMenu === option.value}
+            onClick={() => setSelectedMenu(option.value)}
+          >
+            {option.label}
+          </button>
+        ))}
+      </nav>
       {content}
     </React.Fragment>
   )

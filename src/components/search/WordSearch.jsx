@@ -69,55 +69,34 @@ const WordSearch = () => {
 
   return (
     <div>
-      <input
-        type="text"
-        placeholder="Search for a word"
-        value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
-        onKeyPress={handleKeyPress}
-        style={{
-          padding: '12px 16px',
-          fontSize: '16px',
-          width: '100%',
-          maxWidth: '500px',
-          marginBottom: '16px',
-          borderRadius: '6px',
-          border: '1px solid var(--card-border)',
-          backgroundColor: 'var(--card-bg)',
-          color: 'var(--text)',
-          boxSizing: 'border-box'
-        }}
-      />
-      <button 
-        type="button" 
-        onClick={handleSearch} 
-        disabled={isLoading}
-        style={{
-          padding: '12px 24px',
-          fontSize: '16px',
-          fontWeight: '500',
-          backgroundColor: 'var(--info)',
-          color: 'white',
-          border: 'none',
-          borderRadius: '6px',
-          cursor: isLoading ? 'default' : 'pointer',
-          opacity: isLoading ? 0.6 : 1,
-          transition: 'opacity 0.2s ease, transform 0.1s ease'
-        }}
-        onMouseOver={(e) => {
-          if (!isLoading) {
-            e.target.style.opacity = '0.9';
-            e.target.style.transform = 'translateY(-1px)';
-          }
-        }}
-        onMouseOut={(e) => {
-          e.target.style.opacity = isLoading ? 0.6 : 1;
-          e.target.style.transform = 'translateY(0)';
-        }}
-      >
-        {isLoading ? 'Searching...' : 'Define'}
-      </button>
-      <br/>
+      <div className="WordSearch-form">
+        <input
+          type="text"
+          className="WordSearch-input"
+          placeholder="Search for a word"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          onKeyPress={handleKeyPress}
+        />
+        <button
+          type="button"
+          className="WordSearch-submit"
+          onClick={handleSearch}
+          disabled={isLoading}
+          onMouseOver={(e) => {
+            if (!isLoading) {
+              e.target.style.opacity = '0.9';
+              e.target.style.transform = 'translateY(-1px)';
+            }
+          }}
+          onMouseOut={(e) => {
+            e.target.style.opacity = isLoading ? 0.6 : 1;
+            e.target.style.transform = 'translateY(0)';
+          }}
+        >
+          {isLoading ? 'Searching...' : 'Define'}
+        </button>
+      </div>
       {isLoading && <div style={{ color: 'var(--text)', marginTop: '16px' }}>Loading definition...</div>}
       {error && <div style={{ color: 'var(--error)', marginTop: '16px' }}>Error: {error}</div>}
       <Definitions searchTerm={searchTerm} definitionList={definitions} />
