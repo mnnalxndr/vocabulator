@@ -32,7 +32,7 @@ function App() {
           onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           aria-label="Toggle theme"
         >
-          {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
+          {theme === 'dark' ? '☀️' : '🌙'}
         </button>
       </header>
       <Navigation theme={theme} setTheme={setTheme} />
